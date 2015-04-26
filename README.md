@@ -16,7 +16,7 @@ Before | List Popover | Selected
 
 # Usage
 
-```
+```js
 "use strict";
 
 var React = require('react-native');
