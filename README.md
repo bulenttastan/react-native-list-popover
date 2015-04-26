@@ -4,9 +4,9 @@ Popover is a great way to show a list of items for users to choose from. With <L
 
 The main properties to send from the parent component:
 * `list` list of items to choose from
-* 'isVisible' indicator that makes the popover visible or not
-* 'onClick' callback function that takes an `item` parameter to handle the click operation
-* onClose callback function to set the isVisible to false to close the popover
+* `isVisible` indicator that makes the popover visible or not
+* `onClick` callback function that takes an `item` parameter to handle the click operation
+* `onClose` callback function to set the isVisible to false to close the popover
 
 
 ## Screenshots
