@@ -1,7 +1,8 @@
 # React-Native List Popover
 
 ## Screenshots
---|--|--
+Before | List Popover | Selected
+-------|--------------|---------
 ![](https://github.com/bulenttastan/react-native-list-popover/blob/master/Screenshots/screen1.png) | ![](https://github.com/bulenttastan/react-native-list-popover/blob/master/Screenshots/screen2.png) | ![](https://github.com/bulenttastan/react-native-list-popover/blob/master/Screenshots/screen3.png)
 
 # Usage
