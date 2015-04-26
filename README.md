@@ -1,5 +1,14 @@
 # React-Native List Popover
 
+Popover is a great way to show a list of items for users to choose from. With <ListPopover/> component you can add a very simple pop over screen with a list of items as the child component and access the selected item from the parent component. It is a very easy way of adding a list of options to the UI.
+
+The main properties to send from the parent component:
+* `list` list of items to choose from
+* 'isVisible' indicator that makes the popover visible or not
+* 'onClick' callback function that takes an `item` parameter to handle the click operation
+* onClose callback function to set the isVisible to false to close the popover
+
+
 ## Screenshots
 Before | List Popover | Selected
 -------|--------------|---------
