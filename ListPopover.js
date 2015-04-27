@@ -14,6 +14,7 @@ var {
   View
 } = React;
 var noop = () => {};
+var ds = new ListView.DataSource({rowHasChanged: (r1,r2)=>(r1!==r2)});
 
 
 var ListPopover = React.createClass({
@@ -32,10 +33,14 @@ var ListPopover = React.createClass({
     };
   },
   getInitialState: function() {
-    var ds = new ListView.DataSource({rowHasChanged: (r1,r2)=>(r1!==r2)});
     return {
       dataSource: ds.cloneWithRows(this.props.list)
     };
+  },
+  componentWillReceiveProps: function(nextProps:any) {
+    if (nextProps.list !== this.props.list) {
+      this.setState({dataSource: ds.cloneWithRows(nextProps.list)});
+    }
   },
   handleClick: function(data) {
     this.props.onClick(data);
