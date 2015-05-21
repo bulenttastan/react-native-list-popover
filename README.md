@@ -41,7 +41,7 @@ var TestListPopover = React.createClass({
   showPopover: function() {
     this.setState({isVisible: true});
   },
-  closePopover() {
+  closePopover: function() {
     this.setState({isVisible: false});
   },
   setItem: function(item) {
