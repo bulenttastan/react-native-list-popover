@@ -51,12 +51,18 @@ var ListPopover = React.createClass({
     var separator = <View style={styles.separator}/>;
     if (rowData === this.props.list[0]) {
       separator = {};
+    } 
+    
+    var row = <Text style={styles.rowText}>{rowData}</Text>   
+    if(this.props.renderRow){ 
+      row = this.props.renderRow(rowData);
     }
+          
     return (
       <View>
         {separator}
         <TouchableOpacity onPress={() => this.handleClick(rowData)}>
-          <Text style={styles.rowText}>{rowData}</Text>
+          {row}
         </TouchableOpacity>
       </View>
     );
