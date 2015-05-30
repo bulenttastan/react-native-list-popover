@@ -47,17 +47,19 @@ var ListPopover = React.createClass({
     this.props.onClose();
   },
   renderRow: function(rowData) {
-    var styles = this.props.style || DefaultStyles;
-    var separator = <View style={styles.separator}/>;
+    var separatorStyle = this.props.separatorStyle || DefaultStyles.separator;
+    var rowTextStyle = this.props.rowText || DefaultStyles.rowText;
+
+    var separator = <View style={separatorStyle}/>;
     if (rowData === this.props.list[0]) {
       separator = {};
-    } 
-    
-    var row = <Text style={styles.rowText}>{rowData}</Text>   
-    if(this.props.renderRow){ 
+    }
+
+    var row = <Text style={rowTextStyle}>{rowData}</Text>
+    if (this.props.renderRow) {
       row = this.props.renderRow(rowData);
     }
-          
+
     return (
       <View>
         {separator}
@@ -77,17 +79,19 @@ var ListPopover = React.createClass({
       <ListView
         style={maxHeight}
         dataSource={this.state.dataSource}
-        renderRow={(rowData) => this.renderRow(rowData)}/>
+        renderRow={(rowData) => this.renderRow(rowData)}
+      />
     );
   },
   render: function() {
-    var styles = this.props.style || DefaultStyles;
+    var containerStyle = this.props.containerStyle || DefaultStyles.container;
+    var popoverStyle = this.props.popoverStyle || DefaultStyles.popover;
 
     if (this.props.isVisible) {
       return (
         <TouchableOpacity onPress={this.props.onClose}>
-          <View style={styles.container}>
-            <View style={styles.popover}>
+          <View style={containerStyle}>
+            <View style={popoverStyle}>
               {this.renderList()}
             </View>
           </View>
