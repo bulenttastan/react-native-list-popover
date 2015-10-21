@@ -3,9 +3,6 @@
   "version": "1.0.3",
   "description": "<ListPopover/> component to render a selectable list",
   "main": "ListPopover.js",
-  "dependencies": {
-    "react-native": "^0.4.0"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/bulenttastan/react-native-list-popover.git"
