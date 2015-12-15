@@ -52,7 +52,7 @@ var ListPopover = React.createClass({
 
     var separator = <View style={separatorStyle}/>;
     if (rowData === this.props.list[0]) {
-      separator = {};
+      separator = null;
     }
 
     var row = <Text style={rowTextStyle}>{rowData}</Text>
