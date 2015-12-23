@@ -4,18 +4,18 @@
 "use strict";
 
 var React = require('react-native');
-var SCREEN_HEIGHT = require('Dimensions').get('window').height;
 var {
   ListView,
   PropTypes,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
+  Dimensions
 } = React;
 var noop = () => {};
 var ds = new ListView.DataSource({rowHasChanged: (r1,r2)=>(r1!==r2)});
-
+var SCREEN_HEIGHT = Dimensions.get('window').height;
 
 var ListPopover = React.createClass({
   propTypes: {
@@ -29,7 +29,8 @@ var ListPopover = React.createClass({
       list: [""],
       isVisible: false,
       onClick: noop,
-      onClose: noop
+      onClose: noop,
+      style: DefaultStyles
     };
   },
   getInitialState: function() {
@@ -47,13 +48,9 @@ var ListPopover = React.createClass({
     this.props.onClose();
   },
   renderRow: function(rowData) {
-    var separatorStyle = this.props.separatorStyle || DefaultStyles.separator;
-    var rowTextStyle = this.props.rowText || DefaultStyles.rowText;
-
-    var separator = <View style={separatorStyle}/>;
-    if (rowData === this.props.list[0]) {
-      separator = {};
-    }
+    var separatorStyle = this.props.style.separator;
+    var rowTextStyle = this.props.style.rowText;
+    var separator = (rowData !== this.props.list[0]) ? <View style={separatorStyle} /> : null;
 
     var row = <Text style={rowTextStyle}>{rowData}</Text>
     if (this.props.renderRow) {
@@ -70,7 +67,7 @@ var ListPopover = React.createClass({
     );
   },
   renderList: function() {
-    var styles = this.props.style || DefaultStyles;
+    var styles = this.props.style;
     var maxHeight = {};
     if (this.props.list.length > 12) {
       maxHeight = {height: SCREEN_HEIGHT * 3/4};
@@ -84,8 +81,8 @@ var ListPopover = React.createClass({
     );
   },
   render: function() {
-    var containerStyle = this.props.containerStyle || DefaultStyles.container;
-    var popoverStyle = this.props.popoverStyle || DefaultStyles.popover;
+    var containerStyle = this.props.style.container;
+    var popoverStyle = this.props.style.popover;
 
     if (this.props.isVisible) {
       return (
