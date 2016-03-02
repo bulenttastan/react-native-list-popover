@@ -4,15 +4,16 @@
 "use strict";
 
 var React = require('react-native');
-var SCREEN_HEIGHT = require('Dimensions').get('window').height;
 var {
   ListView,
   PropTypes,
   StyleSheet,
   Text,
+  Dimensions,
   TouchableOpacity,
   View
 } = React;
+var SCREEN_HEIGHT = Dimensions.get('window').height;
 var noop = () => {};
 var ds = new ListView.DataSource({rowHasChanged: (r1,r2)=>(r1!==r2)});
 
@@ -52,7 +53,7 @@ var ListPopover = React.createClass({
 
     var separator = <View style={separatorStyle}/>;
     if (rowData === this.props.list[0]) {
-      separator = {};
+      separator = null;
     }
 
     var row = <Text style={rowTextStyle}>{rowData}</Text>

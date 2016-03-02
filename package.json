@@ -1,11 +1,11 @@
 {
-  "name": "react-native-list-popover",
-  "version": "1.0.3",
+  "name": "react-native-list-overlay",
+  "version": "1.0.7",
   "description": "<ListPopover/> component to render a selectable list",
   "main": "ListPopover.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bulenttastan/react-native-list-popover.git"
+    "url": "https://github.com/whizkid77/react-native-list-popover.git"
   },
   "keywords": [
     "list",
@@ -16,7 +16,7 @@
   "author": "Bulent Tastan <bulenttastan@gmail.com> @bulenttastan",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bulenttastan/react-native-list-popover/issues"
+    "url": "https://github.com/whizkid77/react-native-list-popover/issues"
   },
-  "homepage": "https://github.com/bulenttastan/react-native-list-popover"
+  "homepage": "https://github.com/whizkid77/react-native-list-popover"
 }
