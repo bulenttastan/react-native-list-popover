@@ -1,6 +1,6 @@
 {
   "name": "react-native-list-overlay",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "<ListPopover/> component to render a selectable list",
   "main": "ListPopover.js",
   "repository": {
