@@ -80,6 +80,7 @@ var ListPopover = React.createClass({
         style={maxHeight}
         dataSource={this.state.dataSource}
         renderRow={(rowData) => this.renderRow(rowData)}
+        automaticallyAdjustContentInsets={false}
       />
     );
   },
