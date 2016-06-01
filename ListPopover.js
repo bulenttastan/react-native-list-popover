@@ -3,10 +3,9 @@
  */
 "use strict";
 
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {
   ListView,
-  PropTypes,
   StyleSheet,
   Text,
   Dimensions,
