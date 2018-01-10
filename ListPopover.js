@@ -3,16 +3,15 @@
  */
 "use strict";
 
-var React = require('react-native');
-var {
+import React, {PropTypes} from 'react';
+import {
   ListView,
-  PropTypes,
   StyleSheet,
   Text,
   Dimensions,
   TouchableOpacity,
   View
-} = React;
+} from 'react-native';
 var SCREEN_HEIGHT = Dimensions.get('window').height;
 var noop = () => {};
 var ds = new ListView.DataSource({rowHasChanged: (r1,r2)=>(r1!==r2)});
