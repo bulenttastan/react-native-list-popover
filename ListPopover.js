@@ -3,7 +3,8 @@
  */
 "use strict";
 
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   ListView,
   StyleSheet,
@@ -12,50 +13,39 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-var SCREEN_HEIGHT = Dimensions.get('window').height;
-var noop = () => {};
-var ds = new ListView.DataSource({rowHasChanged: (r1,r2)=>(r1!==r2)});
+const SCREEN_HEIGHT = Dimensions.get('window').height;
+const noop = () => {};
+const ds = new ListView.DataSource({rowHasChanged: (r1,r2)=>(r1!==r2)});
 
-
-var ListPopover = React.createClass({
-  propTypes: {
-    list: PropTypes.array.isRequired,
-    isVisible: PropTypes.bool,
-    onClick: PropTypes.func,
-    onClose: PropTypes.func,
-  },
-  getDefaultProps: function() {
-    return {
-      list: [""],
-      isVisible: false,
-      onClick: noop,
-      onClose: noop
-    };
-  },
-  getInitialState: function() {
-    return {
+class ListPopover extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       dataSource: ds.cloneWithRows(this.props.list)
     };
-  },
-  componentWillReceiveProps: function(nextProps:any) {
+  }
+
+  componentWillReceiveProps(nextProps) {
     if (nextProps.list !== this.props.list) {
       this.setState({dataSource: ds.cloneWithRows(nextProps.list)});
     }
-  },
-  handleClick: function(data) {
+  }
+
+  handleClick(data) {
     this.props.onClick(data);
     this.props.onClose();
-  },
-  renderRow: function(rowData) {
-    var separatorStyle = this.props.separatorStyle || DefaultStyles.separator;
-    var rowTextStyle = this.props.rowText || DefaultStyles.rowText;
+  }
 
-    var separator = <View style={separatorStyle}/>;
+  renderRow(rowData) {
+    const separatorStyle = this.props.separatorStyle || DefaultStyles.separator;
+    const rowTextStyle = this.props.rowText || DefaultStyles.rowText;
+
+    let separator = <View style={separatorStyle}/>;
     if (rowData === this.props.list[0]) {
       separator = null;
     }
 
-    var row = <Text style={rowTextStyle}>{rowData}</Text>
+    let row = <Text style={rowTextStyle}>{rowData}</Text>
     if (this.props.renderRow) {
       row = this.props.renderRow(rowData);
     }
@@ -68,10 +58,11 @@ var ListPopover = React.createClass({
         </TouchableOpacity>
       </View>
     );
-  },
-  renderList: function() {
-    var styles = this.props.style || DefaultStyles;
-    var maxHeight = {};
+  }
+
+  renderList() {
+    const styles = this.props.style || DefaultStyles;
+    let maxHeight = {};
     if (this.props.list.length > 12) {
       maxHeight = {height: SCREEN_HEIGHT * 3/4};
     }
@@ -80,21 +71,19 @@ var ListPopover = React.createClass({
         style={maxHeight}
         dataSource={this.state.dataSource}
         renderRow={(rowData) => this.renderRow(rowData)}
-        automaticallyAdjustContentInsets={false}
       />
     );
-  },
-  render: function() {
-    var containerStyle = this.props.containerStyle || DefaultStyles.container;
-    var popoverStyle = this.props.popoverStyle || DefaultStyles.popover;
+  }
+
+  render() {
+    const containerStyle = this.props.containerStyle || DefaultStyles.container;
+    const popoverStyle = this.props.popoverStyle || DefaultStyles.popover;
 
     if (this.props.isVisible) {
       return (
-        <TouchableOpacity onPress={this.props.onClose}>
-          <View style={containerStyle}>
-            <View style={popoverStyle}>
-              {this.renderList()}
-            </View>
+        <TouchableOpacity onPress={this.props.onClose} style={containerStyle}>
+          <View style={popoverStyle}>
+            {this.renderList()}
           </View>
         </TouchableOpacity>
       );
@@ -102,34 +91,45 @@ var ListPopover = React.createClass({
       return (<View/>);
     }
   }
-});
+}
 
+ListPopover.propTypes = {
+  list: PropTypes.array.isRequired,
+  isVisible: PropTypes.bool,
+  onClick: PropTypes.func,
+  onClose: PropTypes.func,
+};
 
-var DefaultStyles = StyleSheet.create({
+ListPopover.defaultProps = {
+  list: [""],
+  isVisible: false,
+  onClick: noop,
+  onClose: noop
+};
+
+const DefaultStyles = StyleSheet.create({
   container: {
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    position: 'absolute',
+    alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'transparent',
+    position: 'absolute',
+    width: '100%',
+    zIndex: 10,
   },
   popover: {
-    margin: 10,
+    backgroundColor: '#fff',
     borderRadius: 3,
     padding: 3,
-    backgroundColor: '#ffffff',
+    width: '96%',
   },
   rowText: {
     padding: 10,
   },
   separator: {
+    backgroundColor: '#ccc',
     height: 0.5,
     marginLeft: 8,
     marginRight: 8,
-    backgroundColor: '#CCC',
   },
 });
 
-module.exports = ListPopover;
+export default ListPopover;
