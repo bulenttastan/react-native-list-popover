@@ -17,69 +17,51 @@ Before | List Popover | Selected
 # Usage
 
 ```js
-"use strict";
+import React from 'react';
+import {StyleSheet, Text, View, TouchableHighlight} from 'react-native';
+import ListPopover from 'react-native-list-popover';
 
-var React = require('react-native');
-var ListPopover = require('react-native-list-popover');
-var {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View,
-} = React;
-var items = ["Item 1", "Item 2"];
+const items = ['Item 1', 'Item 2'];
 
-var TestListPopover = React.createClass({
-  getInitialState: function() {
-    return {
-      item: "Select Item",
-      isVisible: false,
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isVisible: false
     };
-  },
+  }
 
-  showPopover: function() {
-    this.setState({isVisible: true});
-  },
-  closePopover: function() {
-    this.setState({isVisible: false});
-  },
-  setItem: function(item) {
-    this.setState({item: item});
-  },
-
-  render: function() {
+  render() {
     return (
       <View style={styles.container}>
-        <TouchableHighlight style={styles.button} onPress={this.showPopover}>
-          <Text>{this.state.item}</Text>
+        <TouchableHighlight
+          style={styles.button}
+          onPress={() => this.setState({isVisible: true})}>
+          <Text>{this.state.item || 'Select'}</Text>
         </TouchableHighlight>
-
         <ListPopover
           list={items}
           isVisible={this.state.isVisible}
-          onClick={this.setItem}
-          onClose={this.closePopover}/>
+          onClick={(item) => this.setState({item: item})}
+          onClose={() => this.setState({isVisible: false})}/>
       </View>
     );
   }
-});
+}
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: '#532860',
+    justifyContent: 'center',
   },
   button: {
+    backgroundColor: '#b8c',
     borderRadius: 4,
-    padding: 10,
     marginLeft: 10,
     marginRight: 10,
-    backgroundColor: "#B8C",
+    padding: 10,
   },
 });
-
-AppRegistry.registerComponent('TestListPopover', () => TestListPopover);
 ```
